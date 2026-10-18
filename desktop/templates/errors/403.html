@@ -1,0 +1,8 @@
+{% extends "errors/layout.html" %}
+{% block title %}没有权限{% endblock %}
+{% block body %}
+<div class="code">403</div>
+<h1>没有权限</h1>
+<p>{{ msg|default('该操作仅管理员可执行。') }}</p>
+<p class="hint">如需操作，请让管理员账号登录后处理。</p>
+{% endblock %}

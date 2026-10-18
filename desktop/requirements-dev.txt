@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest==8.3.2
+# 6.x 已放弃 Win7 支持；5.13.2 是最后一个能在 Win7 上跑（且产出可运行）的版本
+pyinstaller==5.13.2
+pip-audit==2.7.3

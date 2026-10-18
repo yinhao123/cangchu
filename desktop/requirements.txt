@@ -1,0 +1,14 @@
+# 版本必须 == 锁定；新增/降级依赖须先改 docs/01-产品需求文档.md 第 2.1 章（CODEBUDDY.md 禁止事项 1）
+# 本文件锁定的是「Windows 7 SP1 + Python 3.8.10 服务端」运行线，逐项取舍依据与真机验收清单见 docs/12。
+# 禁止引入：ORM / Pydantic / Redis 客户端 / Celery / APScheduler / requests（运行时零外部 HTTP 调用）
+Flask==3.0.3
+# 3.0.0 的 requires-python 是 >=3.9，Win7 线的解释器上限是 3.8，只能停在 2.1.2
+waitress==2.1.2
+# 曾用于网页会话；界面改为 SPA 后全站统一走 X-Auth-Token，会话机制已整体下线（docs/09 决策记录）
+python-dotenv==1.0.1
+qrcode[pil]==7.4.2
+python-barcode==0.15.1
+# 10.x 的 Win7 wheel 未在真机验证过；9.5.0 是 Python 3.8 线最后一个稳妥版本
+Pillow==9.5.0
+# 43.x 的 Rust 扩展对 Win7 的支持未在真机验证过；41.0.7 为 Python 3.8 线可用版本
+cryptography==41.0.7

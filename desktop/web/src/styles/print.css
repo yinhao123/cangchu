@@ -1,0 +1,108 @@
+/* =====================================================================
+   单据打印版式（P0-3）—— docs/14 第 5.2 节
+   ★ 与屏幕样式隔离：本文件只写 @media print 与 .sd-print-docs 相关规则，
+     不碰 global.css 里既有的标签打印规则（两者靠 body class 区分）。
+   ★ 两套纸张靠 body 上的 class 切换：.sd-print-a4 / .sd-print-dot；
+     @page 规则由组件按纸张动态注入（body class 无法选择 @page，别在这里硬写）。
+   ★ 针式版式**不用任何 antd 组件**：原生 table，无底色，字号 9~10pt。
+   ===================================================================== */
+
+.sd-print-docs {
+  display: none;
+}
+
+@media print {
+  /* 只要挂了打印文档，页面本身一律不输出，避免把筛选框、按钮、分页器印上去 */
+  body.sd-printing .sd-page > *:not(.sd-print-docs) {
+    display: none !important;
+  }
+
+  body.sd-printing .sd-print-docs {
+    display: block !important;
+  }
+
+  /* 深色模式下打印仍必须是白底黑字（打印样式不继承 [data-theme] 变量） */
+  html,
+  body.sd-printing {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .sd-doc {
+    color: #000;
+    background: #fff;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .sd-doc:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .sd-doc table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .sd-doc th,
+  .sd-doc td {
+    border: 1px solid #000;
+    padding: 2mm 1.5mm;
+    text-align: left;
+    color: #000;
+  }
+
+  .sd-doc th {
+    font-weight: 600;
+    background: #fff !important;
+  }
+
+  .sd-doc tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .sd-doc .sd-num {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .sd-doc .sd-center {
+    text-align: center;
+  }
+
+  /* ---------- A4 纵向 ---------- */
+  body.sd-print-a4 .sd-doc {
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  body.sd-print-a4 .sd-doc-title {
+    font-size: 16pt;
+  }
+
+  /* ---------- 针式连续纸 241×140mm ---------- */
+  body.sd-print-dot .sd-doc {
+    font-size: 9pt;
+    line-height: 1.35;
+  }
+
+  body.sd-print-dot .sd-doc-title {
+    font-size: 12pt;
+  }
+
+  body.sd-print-dot .sd-doc th,
+  body.sd-print-dot .sd-doc td {
+    padding: 1mm;
+  }
+
+  /* 针式纸窄：条码列与备注列收起，避免一行明细折成两行 */
+  body.sd-print-dot .sd-col-barcode {
+    display: none;
+  }
+
+  body.sd-print-dot .sd-doc-head {
+    margin-bottom: 1mm;
+  }
+}

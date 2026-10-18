@@ -1,0 +1,53 @@
+# 敏感与本地
+.env
+.env.local
+*.ini.local
+data/
+logs/
+backups/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite3
+
+# 授权私钥（仅发行方持有；公钥 public.pem 需随包提交）
+**/license/resources/keys/private.pem
+**/license/resources/keys/*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 构建产物
+build/
+dist/
+*.spec.bak
+*.exe
+
+# 前端工程（构建产物 desktop/static/spa 需提交；依赖与本地验证数据不提交）
+desktop/web/node_modules/
+desktop/.e2e/
+
+# IDE / 系统
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# CodeBuddy 本地覆盖（团队共享配置不忽略）
+.codebuddy/settings.local.json
+CODEBUDDY.local.md
+
+# 运行日志
+*.log
+
+# 本地调试产物与助手记忆（不入库）
+.playwright-cli/
+.workbuddy/
+

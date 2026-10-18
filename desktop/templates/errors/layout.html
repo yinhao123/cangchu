@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}操作无法完成{% endblock %}</title>
+  {# 错误页必须**完全自包含**：不能依赖静态 CSS/JS，也不能依赖 SPA 构建产物 ——
+     它正是在「资源可能出问题」的时候才会被渲染出来。
+     CSP 允许 style-src 'unsafe-inline'，因此内联样式是安全的（app.py 的安全头）。 #}
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: #f5f5f5; color: #1f1f1f; padding: 24px;
+      font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    }
+    .card {
+      width: 100%; max-width: 520px; background: #fff; border: 1px solid #f0f0f0;
+      border-radius: 12px; padding: 32px; text-align: center;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .08), 0 2px 8px rgba(0, 0, 0, .04);
+    }
+    .code { font-size: 40px; font-weight: 600; color: #1677ff; line-height: 1.1; }
+    h1 { font-size: 20px; margin: 12px 0 8px; }
+    p { color: #595959; line-height: 1.7; margin: 0 0 8px; }
+    .hint { font-size: 12px; color: #8c8c8c; }
+    code { background: #fafafa; border: 1px solid #f0f0f0; border-radius: 4px; padding: 2px 6px; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #141414; color: #f0f0f0; }
+      .card { background: #1f1f1f; border-color: #303030; }
+      p { color: #a6a6a6; }
+      code { background: #262626; border-color: #303030; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    {% block body %}{% endblock %}
+  </div>
+</body>
+</html>

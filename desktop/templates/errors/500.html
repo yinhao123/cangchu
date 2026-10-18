@@ -1,0 +1,11 @@
+{% extends "errors/layout.html" %}
+{% block title %}服务异常{% endblock %}
+{# 堆栈只进日志，页面只给通用文案 + 追踪码（PRD 10.1 错误信息脱敏） #}
+{% block body %}
+<div class="code">500</div>
+<h1>操作无法完成</h1>
+<p>{{ msg|default('服务内部出现异常，操作没有生效。') }}</p>
+<p class="hint">
+  追踪码 <code>{{ trace_id }}</code> —— 把它报给管理员，可直接在服务端日志里定位原因。
+</p>
+{% endblock %}
